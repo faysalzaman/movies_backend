@@ -13,7 +13,7 @@ const upload = uploadMultiple({
       fileTypes: ["images"],
     },
     {
-      name: "video",
+      name: "movie",
       maxCount: 1,
       fileTypes: ["videos"],
     },
@@ -22,5 +22,8 @@ const upload = uploadMultiple({
 });
 
 router.post("/create", upload, createMovie);
+router.get("/all", (req, res) => {
+  res.json({ message: "All movies" });
+});
 
 export default router;

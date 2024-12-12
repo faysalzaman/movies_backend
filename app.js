@@ -1,15 +1,17 @@
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
+import mongoose from "mongoose";
 import path from "path";
 import swaggerUi from "swagger-ui-express";
-import mongoose from "mongoose";
 
+import { MulterError } from "multer";
 import swaggerSpec from "./config/swagger.js";
+import categoryRoutes from "./routes/category.js";
+import movieRoutes from "./routes/movie.js";
 import videoRoutes from "./routes/video.js";
 import MyError from "./utils/error.js";
 import response from "./utils/response.js";
-import { MulterError } from "multer";
 
 dotenv.config();
 
@@ -24,6 +26,8 @@ app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
 // Add your routes...
 app.use("/api/v1/video", videoRoutes);
+app.use("/api/v1/movie", movieRoutes);
+app.use("/api/v1/category", categoryRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res, next) => {
